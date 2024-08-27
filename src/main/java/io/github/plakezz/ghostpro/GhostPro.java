@@ -14,7 +14,6 @@ public class GhostPro
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-		// some example code
-        System.out.println("DIRT BLOCK >> "+Blocks.dirt.getUnlocalizedName());
+        MinecraftForge.EVENT_BUS.register(new Events());
     }
 }
