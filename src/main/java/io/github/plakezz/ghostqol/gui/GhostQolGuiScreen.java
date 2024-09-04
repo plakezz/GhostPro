@@ -1,5 +1,6 @@
-package io.github.plakezz.ghostqol;
+package io.github.plakezz.ghostqol.gui;
 
+import io.github.plakezz.ghostqol.utils.HypixelAPI; // Import HypixelAPI
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,7 +17,7 @@ public class GhostQolGuiScreen extends GuiScreen {
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws Exception {
+    protected void actionPerformed(GuiButton button) { // Removed throws Exception
         // Handle button clicks
         if (button.id == 0) {
             // Open Achievement Tracker screen (if separate)
@@ -30,11 +31,6 @@ public class GhostQolGuiScreen extends GuiScreen {
         drawDefaultBackground();
         drawCenteredString(fontRendererObj, "Ghost QOL Mod", width / 2, 20, 0xFFFFFF);
         // ... Draw other elements
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        // ... (Existing code)
 
         // Fetch data from Hypixel API
         String playerUUID = mc.thePlayer.getUniqueID().toString();

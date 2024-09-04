@@ -2,9 +2,11 @@ package io.github.plakezz.ghostqol.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader; // Import JsonReader
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.StringReader; // Import StringReader
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -26,7 +28,12 @@ public class HypixelAPI {
             }
             reader.close();
 
-            JsonObject jsonObject = JsonParser.parseString(response.toString()).getAsJsonObject();
+            JsonReader jsonReader = new JsonReader(new StringReader(response.toString()));
+            jsonReader.setLenient(true); // Allow for lenient parsing (optional)
+
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObject = parser.parse(jsonReader).getAsJsonObject(); // Call parse on the instance
+
             return jsonObject;
 
         } catch (Exception e) {
@@ -64,5 +71,4 @@ public class HypixelAPI {
         double profitPerHour = killsPerHour * 0.5; // Assuming 0.5 coins per ghost kill (replace with actual values)
         return profitPerHour;
     }
-}
 }
