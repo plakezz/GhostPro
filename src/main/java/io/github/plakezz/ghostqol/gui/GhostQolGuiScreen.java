@@ -6,6 +6,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.io.IOException;
+
 @SideOnly(Side.CLIENT)
 public class GhostQolGuiScreen extends GuiScreen {
 
@@ -14,6 +16,8 @@ public class GhostQolGuiScreen extends GuiScreen {
         // Add buttons, labels, etc. to the GUI
         buttonList.add(new GuiButton(0, width / 2 - 100, height / 2 - 20, 200, 20, "Achievement Tracker"));
         // ... Add other buttons for Kill Combo, Kills/Hour, Profit Calculator
+
+        super.initGui(); // Call super.initGui() at the end
     }
 
     @Override
@@ -23,6 +27,12 @@ public class GhostQolGuiScreen extends GuiScreen {
             // Open Achievement Tracker screen (if separate)
         }
         // ... Handle other button clicks
+
+        try {
+            super.actionPerformed(button); // Call super.actionPerformed() at the end
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -47,6 +57,6 @@ public class GhostQolGuiScreen extends GuiScreen {
         drawString(fontRendererObj, "Kills per hour: " + String.format("%.2f", killsPerHour), 10, 40, 0xFFFFFF);
         drawString(fontRendererObj, "Estimated profit per hour: " + String.format("%.2f", profitPerHour), 10, 60, 0xFFFFFF);
 
-        // ... (Rest of the drawScreen method)
+        super.drawScreen(mouseX, mouseY, partialTicks); // Call super.drawScreen() at the end
     }
 }

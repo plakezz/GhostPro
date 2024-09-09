@@ -9,7 +9,9 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.FMLLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +24,13 @@ public class GhostQol {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         // Initialize features here (e.g., AchievementTracker)
+        ClientCommandHandler.instance.registerCommand(new CommandGhostQol());// Register command here
+        FMLLog.info("Ghost QOL Mod initialized successfully.");
     }
 
-    @Mod.EventHandler
-    public void serverStarting(FMLServerStartingEvent event) {
-        // Register command
-        ClientCommandHandler.instance.registerCommand(new CommandGhostQol());
-    }
 
     // Inner class for the command
+    @SideOnly(Side.CLIENT)
     public static class CommandGhostQol implements ICommand {
 
         @Override
