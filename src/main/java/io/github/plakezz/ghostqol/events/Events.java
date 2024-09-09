@@ -1,4 +1,4 @@
-package io.github.plakezz.ghostqol;
+package io.github.plakezz.ghostqol.events;
 
 public class Events {
 
